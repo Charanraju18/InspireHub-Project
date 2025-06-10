@@ -1,0 +1,21 @@
+// abstract
+@import "abstracts/index";
+// Component
+@import "components/index";
+// utilities
+@import "utilities/index";
+// Module
+@import "layout/index";
+// Pages
+@import "pages/index";
+// Extra
+@import "extra";
+
+@import "animate.css";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+@import "select2/dist/css/select2.css";
+@import "react-modal-video/css/modal-video.css";
+@import "lightgallery/css/lightgallery.css";
+@import "lightgallery/css/lg-zoom.css";
+@import "lightgallery/css/lg-thumbnail.css";
