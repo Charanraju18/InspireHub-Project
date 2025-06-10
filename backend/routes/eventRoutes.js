@@ -1,24 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-
 const {
   createEvent,
   getAllEvents,
   getEventById,
 } = require("../controllers/eventController");
 
-// Multer config
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + file.originalname;
-    cb(null, uniqueSuffix);
-  },
-});
-
+// Multer config (memory storage for base64)
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Routes
