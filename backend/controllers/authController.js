@@ -35,6 +35,8 @@ exports.fullSignup = async (req, res) => {
       bio,
       profilePicture, // base64 string
       socialLinks,
+      phoneNumber,
+      location,
       instructorProfile,
       learnerProfile,
     } = req.body;
@@ -42,30 +44,17 @@ exports.fullSignup = async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ msg: "User already exists" });
-
-    // Handle base64 profile picture conversion to image file
     let profilePictureUrl = "";
-
     if (profilePicture && profilePicture.startsWith("data:image")) {
       const base64Data = profilePicture.replace(/^data:image\/\w+;base64,/, "");
       const buffer = Buffer.from(base64Data, "base64");
-
-      // Generate unique filename
       const filename = `profile_${Date.now()}.jpg`;
-
-      // Directory to save uploads
       const uploadDir = path.join(__dirname, "../uploads");
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir);
       }
-
-      // Full path to save file
       const uploadPath = path.join(uploadDir, filename);
-
-      // Write buffer to file
       fs.writeFileSync(uploadPath, buffer);
-
-      // Set URL to store in DB or return
       profilePictureUrl = `/uploads/${filename}`;
     }
 
@@ -78,6 +67,8 @@ exports.fullSignup = async (req, res) => {
       bio,
       profilePicture: profilePictureUrl,
       socialLinks,
+      phoneNumber,
+      location,
     };
 
     if (role === "Instructor") {
@@ -98,7 +89,7 @@ exports.fullSignup = async (req, res) => {
       user: {
         id: newUser._id,
         role: newUser.role,
-        profilePicture: newUser.profilePicture, // send image path back
+        profilePicture: newUser.profilePicture, 
       },
     });
   } catch (err) {

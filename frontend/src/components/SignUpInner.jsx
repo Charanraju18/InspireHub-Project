@@ -8,6 +8,8 @@ const SignUpInner = () => {
     email: "",
     password: "",
     profilePicture: "",
+    phoneNumber: "",
+    location: "",
     bio: "",
     socialLinks: {
       linkedin: "",
@@ -80,6 +82,8 @@ const SignUpInner = () => {
       email: form.email,
       password: form.password,
       profilePicture: form.profilePicture,
+      phoneNumber: form.phoneNumber.trim(),
+      location: form.location.trim(),
       bio: form.bio,
       socialLinks: form.socialLinks,
       role: form.role,
@@ -113,7 +117,7 @@ const SignUpInner = () => {
         navigate("/sign-in");
       } else {
         const data = await res.json();
-        setError(data.message || "Signup failed.");
+        setError(data.msg || "Signup failed.");
       }
     } catch (err) {
       setError("Network error. Please try again.");
@@ -165,6 +169,14 @@ const SignUpInner = () => {
                 <div className='col-sm-6'>
                   <label htmlFor='bio' className='text-neutral-700 text-lg fw-medium mb-12'>Bio</label>
                   <textarea className='common-input bg-main-25 rounded-24 border-transparent focus-border-main-600' id='bio' name='bio' placeholder='Tell us about yourself...' value={form.bio} onChange={handleChange} />
+                </div>
+                <div className='col-sm-6'>
+                  <label htmlFor='phoneNumber' className='text-neutral-700 text-lg fw-medium mb-12'>Phone Number <span className='text-danger-600'>*</span></label>
+                  <input type='text' className='common-input bg-main-25 rounded-pill border-transparent focus-border-main-600' id='phoneNumber' name='phoneNumber' placeholder='Enter Your Phone Number...' value={form.phoneNumber} onChange={handleChange} required />
+                </div>
+                <div className='col-sm-6'>
+                  <label htmlFor='location' className='text-neutral-700 text-lg fw-medium mb-12'>Location <span className='text-danger-600'>*</span></label>
+                  <input type='text' className='common-input bg-main-25 rounded-pill border-transparent focus-border-main-600' id='location' name='location' placeholder='Enter Your Location...' value={form.location} onChange={handleChange} required />
                 </div>
                 {/* Social Links */}
                 <div className='col-sm-12'>

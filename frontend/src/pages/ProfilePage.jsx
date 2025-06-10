@@ -165,10 +165,7 @@ const ProfilePage = () => {
                 <div className="border border-neutral-30 rounded-12 bg-main-25 p-32 bg-main-25 text-center">
                   <div className="p-16 border border-neutral-50 rounded-circle aspect-ratio-1 max-w-150 max-h-150 mx-auto position-relative">
                     <img
-                      src={
-                        `http://localhost:5000${user.profilePicture}` ||
-                        "/assets/images/default-avatar.png"
-                      }
+                      src={user.profilePicture}
                       alt="profile"
                       className="rounded-circle bg-dark-yellow aspect-ratio-1 cover-img"
                       style={{ width: 120, height: 120, objectFit: "cover" }}
@@ -224,22 +221,17 @@ const ProfilePage = () => {
                   <div className="d-flex flex-column gap-16 align-items-center">
                     <div className="flex-align gap-8">
                       <i className="ph ph-phone text-primary" />
-                      <span className="text-neutral-700">+91-000-000-0000</span>
+                      <span className="text-neutral-700">{user.phoneNumber || "N/A"}</span>
                     </div>
                     <div className="flex-align gap-8">
                       <i className="ph ph-envelope text-success-600" />
-                      <a
-                        href={`mailto:${user.email}`}
-                        className="text-neutral-700 hover-text-main-600"
-                      >
+                      <a href={`mailto:${user.email}`} className="text-neutral-700 hover-text-main-600">
                         {user.email}
                       </a>
                     </div>
                     <div className="flex-align gap-8">
                       <i className="ph ph-map-pin text-warning" />
-                      <span className="text-neutral-700">
-                        Hyderabad, Telangana
-                      </span>
+                      <span className="text-neutral-700">{user.location || "N/A"}</span>
                     </div>
                   </div>
                 </div>
@@ -255,9 +247,8 @@ const ProfilePage = () => {
               >
                 <li className="nav-item" role="presentation">
                   <button
-                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${
-                      activeTab === "personal" ? "active" : ""
-                    }`}
+                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${activeTab === "personal" ? "active" : ""
+                      }`}
                     onClick={() => setActiveTab("personal")}
                   >
                     {" "}
@@ -267,9 +258,8 @@ const ProfilePage = () => {
                 </li>
                 <li className="nav-item" role="presentation">
                   <button
-                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${
-                      activeTab === "education" ? "active" : ""
-                    }`}
+                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${activeTab === "education" ? "active" : ""
+                      }`}
                     onClick={() => setActiveTab("education")}
                   >
                     {" "}
@@ -279,9 +269,8 @@ const ProfilePage = () => {
                 </li>
                 <li className="nav-item" role="presentation">
                   <button
-                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${
-                      activeTab === "stats" ? "active" : ""
-                    }`}
+                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${activeTab === "stats" ? "active" : ""
+                      }`}
                     onClick={() => setActiveTab("stats")}
                   >
                     {" "}
