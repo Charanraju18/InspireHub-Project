@@ -165,10 +165,7 @@ const ProfilePage = () => {
                 <div className="border border-neutral-30 rounded-12 bg-main-25 p-32 bg-main-25 text-center">
                   <div className="p-16 border border-neutral-50 rounded-circle aspect-ratio-1 max-w-150 max-h-150 mx-auto position-relative">
                     <img
-                      src={
-                        `http://localhost:5000${user.profilePicture}` ||
-                        "/assets/images/default-avatar.png"
-                      }
+                      src={user.profilePicture}
                       alt="profile"
                       className="rounded-circle bg-dark-yellow aspect-ratio-1 cover-img"
                       style={{ width: 120, height: 120, objectFit: "cover" }}
@@ -193,10 +190,6 @@ const ProfilePage = () => {
                       <span className="text-main-600 fw-medium">
                         {user.gender}
                       </span>
-                    </span>
-                    <span className="w-4 h-4 bg-main-600 rounded-circle" />
-                    <span className="text-warning text-md">
-                      <i className="ph-bold ph-star" /> 4.8 (114)
                     </span>
                   </div>
 
@@ -255,9 +248,8 @@ const ProfilePage = () => {
               >
                 <li className="nav-item" role="presentation">
                   <button
-                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${
-                      activeTab === "personal" ? "active" : ""
-                    }`}
+                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${activeTab === "personal" ? "active" : ""
+                      }`}
                     onClick={() => setActiveTab("personal")}
                   >
                     {" "}
@@ -267,9 +259,8 @@ const ProfilePage = () => {
                 </li>
                 <li className="nav-item" role="presentation">
                   <button
-                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${
-                      activeTab === "education" ? "active" : ""
-                    }`}
+                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${activeTab === "education" ? "active" : ""
+                      }`}
                     onClick={() => setActiveTab("education")}
                   >
                     {" "}
@@ -279,9 +270,8 @@ const ProfilePage = () => {
                 </li>
                 <li className="nav-item" role="presentation">
                   <button
-                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${
-                      activeTab === "stats" ? "active" : ""
-                    }`}
+                    className={`nav-link rounded-pill bg-main-25 text-md fw-medium text-neutral-500 flex-center w-100 gap-8 ${activeTab === "stats" ? "active" : ""
+                      }`}
                     onClick={() => setActiveTab("stats")}
                   >
                     {" "}
