@@ -1,8 +1,6 @@
 const { User } = require("../Models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const fs = require("fs");
-const path = require("path");
 
 exports.login = async (req, res) => {
   try {
@@ -44,18 +42,11 @@ exports.fullSignup = async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ msg: "User already exists" });
+
+    // Validate base64 image (optional but good practice)
     let profilePictureUrl = "";
     if (profilePicture && profilePicture.startsWith("data:image")) {
-      const base64Data = profilePicture.replace(/^data:image\/\w+;base64,/, "");
-      const buffer = Buffer.from(base64Data, "base64");
-      const filename = `profile_${Date.now()}.jpg`;
-      const uploadDir = path.join(__dirname, "../uploads");
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir);
-      }
-      const uploadPath = path.join(uploadDir, filename);
-      fs.writeFileSync(uploadPath, buffer);
-      profilePictureUrl = `/uploads/${filename}`;
+      profilePictureUrl = profilePicture; // directly store base64 string
     }
 
     const userData = {
@@ -89,7 +80,7 @@ exports.fullSignup = async (req, res) => {
       user: {
         id: newUser._id,
         role: newUser.role,
-        profilePicture: newUser.profilePicture, 
+        profilePicture: newUser.profilePicture, // now it's a base64 string
       },
     });
   } catch (err) {

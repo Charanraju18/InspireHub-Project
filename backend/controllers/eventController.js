@@ -5,23 +5,41 @@ exports.createEvent = async (req, res) => {
   try {
     const { body, file } = req;
 
+    // Parse schedule JSON if sent as string
     let parsedSchedule = {};
     if (body.schedule) {
-      parsedSchedule = JSON.parse(body.schedule);
+      try {
+        parsedSchedule = JSON.parse(body.schedule);
+      } catch (error) {
+        console.error("Error parsing schedule JSON:", error.message);
+        return res.status(400).json({ error: "Invalid schedule format" });
+      }
     }
 
-    if (body.sections && typeof body.sections === "string") {
-      body.sections = JSON.parse(body.sections);
+    // Parse sections JSON if sent as string
+    let parsedSections = [];
+    if (body.sections) {
+      try {
+        parsedSections = JSON.parse(body.sections);
+      } catch (error) {
+        console.error("Error parsing sections JSON:", error.message);
+        return res.status(400).json({ error: "Invalid sections format" });
+      }
     }
+
+    // Convert uploaded image buffer to base64 string
+    const base64Image = file
+      ? `data:${file.mimetype};base64,${file.buffer.toString("base64")}`
+      : parsedSchedule.image || null;
 
     const newEvent = new Event({
       title: body.title,
       intro: body.intro,
       joinLink: body.joinLink,
-      sections: body.sections,
+      sections: parsedSections,
       schedule: {
         ...parsedSchedule,
-        image: file ? "/uploads/" + file.filename : null,
+        image: base64Image,
       },
     });
 

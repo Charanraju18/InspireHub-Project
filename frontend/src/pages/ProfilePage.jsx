@@ -191,10 +191,6 @@ const ProfilePage = () => {
                         {user.gender}
                       </span>
                     </span>
-                    <span className="w-4 h-4 bg-main-600 rounded-circle" />
-                    <span className="text-warning text-md">
-                      <i className="ph-bold ph-star" /> 4.8 (114)
-                    </span>
                   </div>
 
                   <ul className="social-list flex-center gap-16 mt-20">
