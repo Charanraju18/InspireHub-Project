@@ -43,7 +43,6 @@ exports.fullSignup = async (req, res) => {
     if (existingUser)
       return res.status(400).json({ msg: "User already exists" });
 
-    // Validate base64 image (optional but good practice)
     let profilePictureUrl = "";
     if (profilePicture && profilePicture.startsWith("data:image")) {
       profilePictureUrl = profilePicture; // directly store base64 string
