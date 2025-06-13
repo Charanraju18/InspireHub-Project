@@ -1,4 +1,4 @@
-const { User } = require("../Models/User");
+const { User } = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
@@ -141,15 +141,3 @@ exports.resetPassword = async (req, res) => {
 };
 
 
-
-exports.getUserProfile = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const user = await User.findById(userId).select("-password");
-    if (!user) return res.status(404).json({ msg: "User not found" });
-
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(500).json({ msg: "Server error", error: err.message });
-  }
-};
