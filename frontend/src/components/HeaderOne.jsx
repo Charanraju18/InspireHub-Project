@@ -84,65 +84,10 @@ const HeaderOne = () => {
   };
 
   const menuItems = [
-    {
-      label: "Home",
-      links: [
-        { to: "/", label: "Home LMS" },
-        { to: "/index-2", label: "Home Online Course" },
-        { to: "/index-3", label: "Home University" },
-        { to: "/index-4", label: "Home Tutor" },
-        { to: "/index-5", label: "Home Kindergarten" },
-        { to: "/index-6", label: " Home Kindergarten two" },
-      ],
-    },
-    {
-      label: "Courses",
-      links: [
-        { to: "/course", label: "Course Grid View" },
-        { to: "/course-list-view", label: "Course List View" },
-        { to: "/course-details", label: "Course Details" },
-        { to: "/lesson-details", label: "Lesson Details" },
-      ],
-    },
-    {
-      label: "Pages",
-      links: [
-        { to: "/about", label: "About" },
-        { to: "/about-two", label: "About Two" },
-        { to: "/about-three", label: "About Three" },
-        { to: "/about-four", label: "About Four" },
-        { to: "/product", label: "Product" },
-        { to: "/product-details", label: "Product Details" },
-        { to: "/cart", label: "Cart" },
-        { to: "/checkout", label: "Checkout" },
-        { to: "/pricing-plan", label: "Pricing Plan" },
-        { to: "/instructor", label: "Instructor" },
-        { to: "/instructor-two", label: "Instructor Two" },
-        { to: "/instructor-details", label: "Instructor Details" },
-        { to: "/tutor", label: "Premium Tutors" },
-        { to: "/tutor-details", label: "Premium Tutors Details" },
-        { to: "/faq", label: "FAQ" },
-        { to: "/tuition-jobs", label: "Tuition Jobs" },
-        { to: "/events", label: "Events" },
-        { to: "/event-details", label: "Event Details" },
-        { to: "/apply-admission", label: "Apply Admission" },
-        { to: "/gallery", label: "Gallery" },
-        { to: "/privacy-policy", label: "Privacy Policy" },
-        { to: "/favorite-course", label: "Favorite Course" },
-        { to: "/find-tutors", label: "Find Best Tutors" },
-        { to: "/book-online-class", label: "Book Online Class" },
-      ],
-    },
-
-    {
-      label: "Blog",
-      links: [
-        { to: "/blog", label: "Blog Grid" },
-        { to: "/blog-list", label: "Blog List" },
-        { to: "/blog-classic", label: "Blog Classic" },
-        { to: "/blog-details", label: "Blog Details" },
-      ],
-    },
+    { to: "/about", label: "About" },
+    { to: "/roadmaps", label: "Roadmaps" },
+    { to: "/events", label: "Live Events" },
+    { to: "/instructor", label: "Instructors" },
     { to: "/contact", label: "Contact" },
   ];
 
@@ -150,26 +95,26 @@ const HeaderOne = () => {
     <>
       <div className={`side-overlay ${isMenuActive ? "show" : ""}`}></div>
       <header className={`header ${scroll ? "fixed-header" : ""}`}>
-        <div className='container container--xl'>
-          <nav className='header-inner flex-between gap-8'>
-            <div className='header-content-wrapper flex-align flex-grow-1'>
+        <div className="container container--xl">
+          <nav className="header-inner flex-between gap-8">
+            <div className="header-content-wrapper flex-align flex-grow-1">
               {/* Logo Start */}
-              <div className='logo'>
-                <Link to='/' className='link'>
-                  <img src='assets/images/logo/logo.png' alt='Logo' />
+              <div className="logo">
+                <Link to="/" className="link">
+                  <img src="assets/images/logo/logo.png" alt="Logo" />
                 </Link>
               </div>
               {/* Logo End  */}
               {/* Select Start */}
-              <div className='d-sm-block d-none'>
-                <div className='header-select border border-neutral-30 bg-main-25 rounded-pill position-relative'>
-                  <span className='select-icon position-absolute top-50 translate-middle-y inset-inline-start-0 z-1 ms-lg-4 ms-12 text-xl pointer-event-none d-flex'>
-                    <i className='ph-bold ph-squares-four' />
+              {/* <div className="d-sm-block d-none">
+                <div className="header-select border border-neutral-30 bg-main-25 rounded-pill position-relative">
+                  <span className="select-icon position-absolute top-50 translate-middle-y inset-inline-start-0 z-1 ms-lg-4 ms-12 text-xl pointer-event-none d-flex">
+                    <i className="ph-bold ph-squares-four" />
                   </span>
                   <select
-                    className='js-example-basic-single border-0'
-                    name='state'
-                    defaultValue='categories'
+                    className="js-example-basic-single border-0"
+                    name="state"
+                    defaultValue="categories"
                   >
                     <option value={"Categories"}>Categories</option>
                     <option value={"Design"}>Design</option>
@@ -184,18 +129,18 @@ const HeaderOne = () => {
                     <option value={"Motivation"}>Motivation</option>
                   </select>
                 </div>
-              </div>
+              </div> */}
               {/* Select End */}
               {/* Menu Start  */}
-              <div className='header-menu d-lg-block d-none'>
-                <ul className='nav-menu flex-align'>
+              <div className="header-menu d-lg-block d-none">
+                <ul className="nav-menu flex-align">
                   {menuItems.map((item, index) =>
                     item.links ? (
                       <li
                         key={`menu-item-${index}`}
-                        className='nav-menu__item has-submenu'
+                        className="nav-menu__item has-submenu"
                       >
-                        <span to='#' className='nav-menu__link'>
+                        <span to="#" className="nav-menu__link">
                           {item.label}
                         </span>
                         <ul className={`nav-submenu scroll-sm`}>
@@ -208,7 +153,7 @@ const HeaderOne = () => {
                             >
                               <a
                                 href={link.to}
-                                className='nav-submenu__link hover-bg-neutral-30'
+                                className="nav-submenu__link hover-bg-neutral-30"
                               >
                                 {link.label}
                               </a>
@@ -223,7 +168,7 @@ const HeaderOne = () => {
                           pathname === item.to && "activePage"
                         }`}
                       >
-                        <a href={item.to} className='nav-menu__link'>
+                        <a href={item.to} className="nav-menu__link">
                           {item.label}
                         </a>
                       </li>
@@ -231,51 +176,59 @@ const HeaderOne = () => {
                   )}
                   {/* Profile tab beside Contact */}
                   {/* REMOVE underline and icon from Profile tab */}
-                  <li className='nav-menu__item'>
+                  {/* <li className='nav-menu__item'>
                     <button
                       onClick={handleProfileClick}
-                      className='nav-menu__link btn btn-link p-0 text-main-600'
+                      className='nav-menu__item btn btn-link p-0 text-main-600'
                       style={{ fontWeight: 600, fontSize: "1rem", textDecoration: "none" }}
                     >
                       Profile
                     </button>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               {/* Menu End  */}
             </div>
             {/* Header Right start */}
-            <div className='header-right flex-align'>
-              <form
-                action='#'
-                className='search-form position-relative d-xl-block d-none'
-              >
-                <input
-                  type='text'
-                  className='common-input rounded-pill bg-main-25 pe-48 border-neutral-30'
-                  placeholder='Search...'
-                />
-                <button
-                  type='submit'
-                  className='w-36 h-36 bg-main-600 hover-bg-main-700 rounded-circle flex-center text-md text-white position-absolute top-50 translate-middle-y inset-inline-end-0 me-8'
-                >
-                  <i className='ph-bold ph-magnifying-glass' />
-                </button>
-              </form>
+            <div className="header-right flex-align">
+              {isAuthenticated && (
+                <>
+                  <button
+                    className="info-action w-52 h-52 bg-main-25 hover-bg-main-600 border border-neutral-30 rounded-circle flex-center text-2xl text-neutral-500 hover-text-white hover-border-main-600"
+                    style={{ marginRight: 8 }}
+                    title="Wishlist"
+                    onClick={() => navigate("/wishlist")}
+                  >
+                    <i className="ph ph-heart" />
+                  </button>
+                  <button
+                    onClick={handleProfileClick}
+                    className="info-action w-52 h-52 bg-main-25 hover-bg-main-600 border border-neutral-30 rounded-circle flex-center text-2xl text-neutral-500 hover-text-white hover-border-main-600"
+                    style={{ marginRight: 8 }}
+                    title="Profile"
+                  >
+                    <i className="ph ph-user-circle" />
+                  </button>
+                </>
+              )}
               <button
                 onClick={handleUserIconClick}
-                className='info-action w-52 h-52 bg-main-25 hover-bg-main-600 border border-neutral-30 rounded-circle flex-center text-2xl text-neutral-500 hover-text-white hover-border-main-600'
+                className="info-action w-52 h-52 bg-main-25 hover-bg-main-600 border border-neutral-30 rounded-circle flex-center text-2xl text-neutral-500 hover-text-white hover-border-main-600"
                 style={{ marginRight: 8 }}
-                title={isAuthenticated ? 'Sign Out' : 'Sign In'}
+                title={isAuthenticated ? "Sign Out" : "Sign In"}
               >
-                <i className={`ph ${isAuthenticated ? 'ph-sign-out' : 'ph-user-circle'}`} />
+                <i
+                  className={`ph ${
+                    isAuthenticated ? "ph-sign-out" : "ph-user-circle"
+                  }`}
+                />
               </button>
               <button
-                type='button'
-                className='toggle-mobileMenu d-lg-none text-neutral-200 flex-center'
+                type="button"
+                className="toggle-mobileMenu d-lg-none text-neutral-200 flex-center"
                 onClick={toggleMenu}
               >
-                <i className='ph ph-list' />
+                <i className="ph ph-list" />
               </button>
             </div>
             {/* Header Right End  */}
@@ -288,15 +241,15 @@ const HeaderOne = () => {
           isMenuActive ? "active" : ""
         }`}
       >
-        <button type='button' className='close-button' onClick={closeMenu}>
-          <i className='ph ph-x' />{" "}
+        <button type="button" className="close-button" onClick={closeMenu}>
+          <i className="ph ph-x" />{" "}
         </button>
-        <div className='mobile-menu__inner'>
-          <Link to='/' className='mobile-menu__logo'>
-            <img src='assets/images/logo/logo.png' alt='Logo' />
+        <div className="mobile-menu__inner">
+          <Link to="/" className="mobile-menu__logo">
+            <img src="assets/images/logo/logo.png" alt="Logo" />
           </Link>
-          <div className='mobile-menu__menu'>
-            <ul className='nav-menu flex-align nav-menu--mobile'>
+          <div className="mobile-menu__menu">
+            <ul className="nav-menu flex-align nav-menu--mobile">
               {menuItems.map((item, index) =>
                 item.links ? (
                   <li
@@ -306,13 +259,13 @@ const HeaderOne = () => {
                     }`}
                     onClick={() => handleSubmenuClick(index)}
                   >
-                    <span className='nav-menu__link'>{item.label}</span>
+                    <span className="nav-menu__link">{item.label}</span>
                     <ul className={`nav-submenu scroll-sm`}>
                       {item.links.map((link, linkIndex) => (
-                        <li key={linkIndex} className='nav-submenu__item'>
+                        <li key={linkIndex} className="nav-submenu__item">
                           <Link
                             to={link.to}
-                            className='nav-submenu__link hover-bg-neutral-30'
+                            className="nav-submenu__link hover-bg-neutral-30"
                           >
                             {link.label}
                           </Link>
@@ -327,21 +280,21 @@ const HeaderOne = () => {
                     }`}
                     key={index}
                   >
-                    <Link to={item.to} className='nav-menu__link'>
+                    <Link to={item.to} className="nav-menu__link">
                       {item.label}
                     </Link>
                   </li>
                 )
               )}
             </ul>
-            <div className='d-sm-none d-block mt-24'>
-              <div className='header-select mobile border border-neutral-30 bg-main-25 rounded-pill position-relative'>
-                <span className='select-icon position-absolute top-50 translate-middle-y inset-inline-start-0 z-1 ms-lg-4 ms-12 text-xl pointer-event-none d-flex'>
-                  <i className='ph-bold ph-squares-four' />
+            <div className="d-sm-none d-block mt-24">
+              <div className="header-select mobile border border-neutral-30 bg-main-25 rounded-pill position-relative">
+                <span className="select-icon position-absolute top-50 translate-middle-y inset-inline-start-0 z-1 ms-lg-4 ms-12 text-xl pointer-event-none d-flex">
+                  <i className="ph-bold ph-squares-four" />
                 </span>
                 <select
-                  className='js-example-basic-single border-0'
-                  name='state'
+                  className="js-example-basic-single border-0"
+                  name="state"
                 >
                   <option value={"Categories"}>Categories</option>
                   <option value={"Design"}>Design</option>
