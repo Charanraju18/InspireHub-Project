@@ -77,9 +77,17 @@ const HeaderOne = () => {
   const handleUserIconClick = () => {
     if (isAuthenticated) {
       logout();
-      navigate("/"); // Redirect to home page after logout
+      navigate("/"); 
     } else {
       navigate("/sign-in");
+    }
+  };
+
+  const handleProtectedMenuClick = (to) => {
+    if (!isAuthenticated && ["/roadmaps", "/instructor", "/events"].includes(to)) {
+      navigate("/sign-in");
+    } else {
+      navigate(to);
     }
   };
 
@@ -168,9 +176,19 @@ const HeaderOne = () => {
                           pathname === item.to && "activePage"
                         }`}
                       >
-                        <a href={item.to} className="nav-menu__link">
-                          {item.label}
-                        </a>
+                        {['/roadmaps', '/instructor', '/events'].includes(item.to) ? (
+                          <button
+                            className="nav-menu__link"
+                            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                            onClick={() => handleProtectedMenuClick(item.to)}
+                          >
+                            {item.label}
+                          </button>
+                        ) : (
+                          <a href={item.to} className="nav-menu__link">
+                            {item.label}
+                          </a>
+                        )}
                       </li>
                     )
                   )}
@@ -280,9 +298,19 @@ const HeaderOne = () => {
                     }`}
                     key={index}
                   >
-                    <Link to={item.to} className="nav-menu__link">
-                      {item.label}
-                    </Link>
+                    {['/roadmaps', '/instructor', '/events'].includes(item.to) ? (
+                      <button
+                        className="nav-menu__link"
+                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                        onClick={() => { handleProtectedMenuClick(item.to); closeMenu(); }}
+                      >
+                        {item.label}
+                      </button>
+                    ) : (
+                      <Link to={item.to} className="nav-menu__link">
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 )
               )}
