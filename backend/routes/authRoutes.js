@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { login, fullSignup, getUserProfile, forgotPassword, resetPassword } = require("../controllers/authController");
-const {getAllInstructors, getSelectedInstructor} = require("../controllers/DetailsController");
+const { login, fullSignup, forgotPassword, resetPassword } = require("../controllers/authController");
+const {getUserProfile, getAllInstructors, getSelectedInstructor} = require("../controllers/DetailsController");
 const authMiddleware = require("../middleware/authMiddleware");
 
 router.post("/login", login);
@@ -13,4 +13,3 @@ router.get("/instructors", getAllInstructors);
 router.get("/instructors/:id", getSelectedInstructor);
 
 module.exports = router;
-// 
