@@ -93,7 +93,7 @@ function App() {
         <Route exact path="/instructor" element={<InstructorPage />} />
         <Route
           exact
-          path="/instructor-details"
+          path="/instructor-details/:id"
           element={<InstructorDetailsPage />}
         />
         <Route exact path="/instructor-two" element={<InstructorTwoPage />} />
