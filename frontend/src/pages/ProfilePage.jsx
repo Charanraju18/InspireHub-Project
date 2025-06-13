@@ -217,22 +217,17 @@ const ProfilePage = () => {
                   <div className="d-flex flex-column gap-16 align-items-center">
                     <div className="flex-align gap-8">
                       <i className="ph ph-phone text-primary" />
-                      <span className="text-neutral-700">+91-000-000-0000</span>
+                      <span className="text-neutral-700">{user.phoneNumber || "N/A"}</span>
                     </div>
                     <div className="flex-align gap-8">
                       <i className="ph ph-envelope text-success-600" />
-                      <a
-                        href={`mailto:${user.email}`}
-                        className="text-neutral-700 hover-text-main-600"
-                      >
+                      <a href={`mailto:${user.email}`} className="text-neutral-700 hover-text-main-600">
                         {user.email}
                       </a>
                     </div>
                     <div className="flex-align gap-8">
                       <i className="ph ph-map-pin text-warning" />
-                      <span className="text-neutral-700">
-                        Hyderabad, Telangana
-                      </span>
+                      <span className="text-neutral-700">{user.location || "N/A"}</span>
                     </div>
                   </div>
                 </div>

@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema(
     role: { type: String, enum: ["Instructor", "Learner"], required: true },
     profilePicture: { type: String },
     bio: { type: String, default: "", trim: true },
-
+    phoneNumber: { type: String, default: "", trim: true },
+    location: { type: String, default: "", trim: true },
     socialLinks: {
       linkedin: { type: String, default: "", trim: true },
       github: { type: String, default: "", trim: true },

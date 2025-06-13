@@ -44,6 +44,8 @@ import TutorDetailsPage from "./pages/TutorDetailsPage.jsx";
 import HomePageFive from "./pages/HomePageFive.jsx";
 import HomePageSix from "./pages/HomePageSix.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import ResetPassPage from "./pages/ResetPassPage.jsx";
+import ForgotPage from "./pages/ForgotPassPage.jsx";
 
 function App() {
   return (
@@ -106,6 +108,8 @@ function App() {
         <Route exact path="/tutor" element={<TutorPage />} />
         <Route exact path="/tutor-details" element={<TutorDetailsPage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
+        <Route exact path="/forgot" element={<ForgotPage />} />
+        <Route exact path="/reset-password/:token" element={<ResetPassPage />} />
       </Routes>
     </BrowserRouter>
   );
