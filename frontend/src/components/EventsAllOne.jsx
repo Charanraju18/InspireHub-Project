@@ -22,6 +22,8 @@ const EventsAllOne = () => {
   const [statusFilter, setStatusFilter] = useState("All");
   const [events, setEvents] = useState([]); // <-- use this for fetched data
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => setNow(new Date()), 1000);
@@ -29,9 +31,13 @@ const EventsAllOne = () => {
   }, []);
   // Fetch events from backend on mount
   useEffect(() => {
-    fetch("http://localhost:5000/api/events")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("http://localhost:5000/api/events");
+        if (!res.ok) throw new Error("Failed to fetch events");
+        const data = await res.json();
+
         const parsedData = data.map((event) => {
           const startTime = new Date(event.schedule.startTime);
           const endTime = new Date(event.schedule.endTime);
@@ -46,9 +52,16 @@ const EventsAllOne = () => {
             location,
           };
         });
+
         setEvents(parsedData);
-      })
-      .catch((err) => console.error("Error fetching events:", err));
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
   }, []);
 
   const isLive = (event) => now >= event.startTime && now <= event.endTime;
@@ -105,7 +118,11 @@ const EventsAllOne = () => {
       </div>
 
       <div className="d-flex justify-content-start flex-wrap gap-5 pb-10">
-        {filteredEvents.length === 0 ? (
+        {loading ? (
+          <div className="text-center my-5">Loading...</div>
+        ) : error ? (
+          <div className="text-center my-5 text-danger">{error}</div>
+        ) : filteredEvents.length === 0 ? (
           <p className="text-center w-100 text-muted">No events found.</p>
         ) : (
           [...filteredEvents]
