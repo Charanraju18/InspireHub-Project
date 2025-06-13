@@ -1,6 +1,7 @@
-const { User } = require("../Models/User");
+const { User } = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 exports.login = async (req, res) => {
   try {
@@ -31,8 +32,10 @@ exports.fullSignup = async (req, res) => {
       gender,
       role,
       bio,
-      profilePicture, // base64 string
+      profilePicture, 
       socialLinks,
+      phoneNumber,
+      location,
       instructorProfile,
       learnerProfile,
     } = req.body;
@@ -41,10 +44,9 @@ exports.fullSignup = async (req, res) => {
     if (existingUser)
       return res.status(400).json({ msg: "User already exists" });
 
-    // Validate base64 image (optional but good practice)
     let profilePictureUrl = "";
     if (profilePicture && profilePicture.startsWith("data:image")) {
-      profilePictureUrl = profilePicture; // directly store base64 string
+      profilePictureUrl = profilePicture; 
     }
 
     const userData = {
@@ -56,6 +58,8 @@ exports.fullSignup = async (req, res) => {
       bio,
       profilePicture: profilePictureUrl,
       socialLinks,
+      phoneNumber,
+      location,
     };
 
     if (role === "Instructor") {
@@ -76,7 +80,7 @@ exports.fullSignup = async (req, res) => {
       user: {
         id: newUser._id,
         role: newUser.role,
-        profilePicture: newUser.profilePicture, // now it's a base64 string
+        profilePicture: newUser.profilePicture, 
       },
     });
   } catch (err) {
@@ -85,14 +89,56 @@ exports.fullSignup = async (req, res) => {
   }
 };
 
-exports.getUserProfile = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const user = await User.findById(userId).select("-password");
-    if (!user) return res.status(404).json({ msg: "User not found" });
 
-    res.status(200).json(user);
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" });
+    const resetLink = `http://localhost:3000/reset-password/${token}`;
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+    await transporter.sendMail({
+      from: `<${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: "Password Reset Link",
+      html: `<p>Click the link to reset your password:</p><a href="${resetLink}">${resetLink}</a>`
+    });
+
+    res.status(200).json({ message: "Reset link sent to email" });
   } catch (err) {
-    res.status(500).json({ msg: "Server error", error: err.message });
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    if (!newPassword) return res.status(400).json({ message: "New password is required" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password has been reset successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Invalid or expired token", error: err.message });
+  }
+};
+
+
+
