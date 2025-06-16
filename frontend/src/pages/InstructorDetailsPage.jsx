@@ -27,10 +27,10 @@ const InstructorDetailsPage = () => {
       <InstructorDetails />
 
       {/* CourseAllOne */}
-      <CourseAllOne />
+      {/* <CourseAllOne /> */}
 
       {/* TestimonialsTwo */}
-      <TestimonialsTwo />
+      {/* <TestimonialsTwo /> */}
 
       {/* CertificateOne */}
       <CertificateOne />
